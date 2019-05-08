@@ -1,8 +1,8 @@
 <template>
   <div id="News">
-      <div v-for="(news, index) in Newslist" :key="index">
-        <NewsCard :news="news"></NewsCard>
-      </div>
+    <div v-for="(news, index) in Newslist" :key="index">
+      <NewsCard :news="news"></NewsCard>
+    </div>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       Newslist: null,
-      show_toggle: true,
+      show_toggle: true
     };
   },
   created() {

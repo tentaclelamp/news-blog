@@ -9,6 +9,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import App from './App'
 import router from './router'
 import VueJsonp from 'vue-jsonp'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import Qs from 'qs'
 import 'tui-editor/dist/tui-editor.css';
 import 'tui-editor/dist/tui-editor-contents.css';
 import 'highlight.js/styles/github.css';
@@ -17,6 +20,9 @@ import 'codemirror/lib/codemirror.css';
 
 Vue.use(BootstrapVue)
 Vue.use(VueJsonp)
+// Vue.prototype.axios = axios;
+Vue.prototype.qs = Qs;
+Vue.use(VueAxios,axios)
 // Vue.use(Editor,Viewer)
 Vue.config.productionTip = false
 
