@@ -18,11 +18,25 @@
               class="usericon"
             ></b-img-lazy>
             <h5 class="mt-0">
+              <!-- <b-img-lazy
+                center
+                rounded="circle"
+                slot="aside"
+                :src="news.pic"
+                width="64"
+                height="64"
+                alt="placeholder"
+                class="usericon"
+              ></b-img-lazy>-->
               <b-link :href="news.url">{{ news.title }}</b-link>
             </h5>
             <p v-html="news.content"></p>
           </b-media>
-          <b-button block @click="ShowToggle" :variant="show_toggle ? '':'outline-warning'">{{ show_toggle ? '阅读全文' : '折叠' }}</b-button>
+          <b-button
+            block
+            @click="ShowToggle"
+            :variant="show_toggle ? '':'outline-warning'"
+          >{{ show_toggle ? '阅读全文' : '折叠' }}</b-button>
         </b-card>
       </b-row>
     </b-container>
@@ -32,7 +46,7 @@
 <script>
 export default {
   name: "NewsCard",
-  props:  ['news'],
+  props: ["news"],
   data() {
     return {
       show_toggle: true
@@ -57,11 +71,11 @@ img {
   max-width: 100%;
 }
 .media-body {
-  max-width: 80%;
+  max-width: 100%;
   flex-wrap: wrap;
-  text-align:center;
+  text-align: center;
 }
 .outline-warning:focus {
-  background: transparent
+  background: transparent;
 }
 </style>

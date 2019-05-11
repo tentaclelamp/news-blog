@@ -1,41 +1,41 @@
 <template>
   <div>
-    <b-container>
-      <!-- it's what i have learnt everyday! -->
-      <b-row>
-        <b-col cols="11">
-          <div class="editor" v-if="insert">
-            <b-input placeholder="请输入title" v-model="title"></b-input>
-            <editor
-              v-model="editorText"
-              mode="markdown"
-              :options="editorOptions"
-              :height="0.8*fullHeight + 'px'"
-            />
-            <b-button @click="complete" id="complete">提交</b-button>
-          </div>
-          <div class="articles" v-if="!insert">
-            <div v-for="(article, index) in articles" :key="index" class="article">
-              <b-card>
-                <b-media>
-                  <p>{{ article.title }}</p>
-                  <viewer :value="article.content"/>
-                  <p style="float: right">{{ article.datetime }}</p>
-                </b-media>
-                <b-button variant="danger" class="delete" @click="remove_article(article.id)">删除</b-button>
-              </b-card>
+      <b-container>
+        <!-- it's what i have learnt everyday! -->
+        <b-row>
+          <b-col cols="10">
+            <div class="editor" v-if="insert">
+              <b-input placeholder="请输入title" v-model="title"></b-input>
+              <editor
+                v-model="editorText"
+                mode="markdown"
+                :options="editorOptions"
+                :height="0.8*fullHeight + 'px'"
+              />
+              <b-button @click="complete" id="complete">提交</b-button>
             </div>
-          </div>
-        </b-col>
-        <b-col>
-          <b-button
-            variant="outline-info"
-            rounded="circle"
-            @click="toggle"
-          >{{ insert ? '显示' : '编辑' }}</b-button>
-        </b-col>
-      </b-row>
-    </b-container>
+            <div class="articles" v-if="!insert">
+              <div v-for="(article, index) in articles" :key="index" class="article">
+                <b-card>
+                  <b-media>
+                    <p>{{ article.title }}</p>
+                    <viewer :value="article.content"/>
+                    <p style="float: right">{{ article.datetime }}</p>
+                  </b-media>
+                  <b-button variant="danger" class="delete" @click="remove_article(article.id)">删除</b-button>
+                </b-card>
+              </div>
+            </div>
+          </b-col>
+          <b-col>
+            <b-button
+              variant="outline-info"
+              rounded="circle"
+              @click="toggle"
+            >{{ insert ? '显示' : '编辑' }}</b-button>
+          </b-col>
+        </b-row>
+      </b-container>
   </div>
 </template>
 
@@ -113,7 +113,7 @@ export default {
           console.log(err);
         });
       this.insert = !this.insert;
-      this.retrieve()
+      this.retrieve();
     },
     retrieve() {
       const options = {
@@ -152,7 +152,7 @@ export default {
       this.axios(options)
         .then(result => {
           console.log(result);
-          this.retrieve()
+          this.retrieve();
         })
         .catch(err => {
           console.log(err);
