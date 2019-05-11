@@ -8,17 +8,8 @@
             tag="li"
             :class="show_toggle ? 'overflow-hidden' : 'overflow'"
           >
-            <b-img-lazy
-              rounded="circle"
-              slot="aside"
-              :src="news.pic"
-              width="64"
-              height="64"
-              alt="placeholder"
-              class="usericon"
-            ></b-img-lazy>
-            <h5 class="mt-0">
-              <!-- <b-img-lazy
+            <b-media vertical-align='center'>
+              <b-img-lazy
                 center
                 rounded="circle"
                 slot="aside"
@@ -27,9 +18,9 @@
                 height="64"
                 alt="placeholder"
                 class="usericon"
-              ></b-img-lazy>-->
+              ></b-img-lazy>
               <b-link :href="news.url">{{ news.title }}</b-link>
-            </h5>
+            </b-media>
             <p v-html="news.content"></p>
           </b-media>
           <b-button
@@ -77,5 +68,9 @@ img {
 }
 .outline-warning:focus {
   background: transparent;
+}
+.title {
+  display: inline-flex;
+  flex-wrap: nowrap;
 }
 </style>

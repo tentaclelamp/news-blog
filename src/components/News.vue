@@ -1,6 +1,7 @@
 <template>
   <div id="News">
-    <div v-for="(news, index) in Newslist" :key="index">
+    <!-- <b-pagination :total-rows='rows' :per-page="10" v-model="currentPage" align='center'></b-pagination> -->
+    <div v-for="(news, index) in Newslist" :key="index" id="News">
       <NewsCard :news="news"></NewsCard>
     </div>
   </div>
@@ -15,6 +16,8 @@ export default {
   components: { NewsCard },
   data() {
     return {
+      rows: 4,
+      currentPage:1,
       Newslist: null,
       show_toggle: true
     };
@@ -23,11 +26,12 @@ export default {
     this.$jsonp("http://api.jisuapi.com/news/get", {
       channel: "科技",
       start: 0,
-      num: 10,
+      num: 100,
       appkey: "fd33d0e0df05c689"
     })
       .then(result => {
         var result = result.result["list"];
+        console.log(Object.keys(result).length)
         this.Newslist = result;
       })
       .catch(err => {});
