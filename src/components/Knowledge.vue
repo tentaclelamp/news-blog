@@ -1,5 +1,8 @@
 <template>
   <div>
+    <b-modal ref="authtip" title="登录认证提醒" centered>
+      <p class="my-4">请先登录再进行操作！</p>
+    </b-modal>
     <b-container>
       <!-- it's what i have learnt everyday! -->
       <b-row>
@@ -110,7 +113,7 @@ export default {
           this.retrieve();
           this.insert = !this.insert;
           this.editorText = "开始编辑博客日志";
-          this.title = ""
+          this.title = "";
         })
         .catch(err => {
           console.log(err);
@@ -155,7 +158,24 @@ export default {
           this.retrieve();
         })
         .catch(err => {
-          console.log(err);
+          if (err.response.status == 401) {
+            const options = {
+              method: "GET",
+              headers: { "content-type": "application/x-www-form-urlencoded" },
+              params: {
+                //文章id
+                nickname: 'sanyo',
+                pwd: '1234'
+                // content: this.editorText
+              }
+            };
+            this.axios(options).then((result) => {
+              console.log(result)
+            }).catch((err) => {
+              console.log(err)
+            });
+            this.$refs["authtip"].show();
+          }
         });
     }
   },

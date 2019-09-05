@@ -23,22 +23,17 @@ export default {
     };
   },
   created() {
-    this.$jsonp("http://api.jisuapi.com/news/get", {
-      channel: "科技",
-      start: 0,
-      num: 100,
-      appkey: "fd33d0e0df05c689"
-    })
-      .then(result => {
-        var result = result.result["list"];
-        console.log(Object.keys(result).length)
-        this.Newslist = result;
-      })
-      .catch(err => {});
+    this.getData()
   },
   methods: {
     ShowToggle() {
       this.show_toggle = !this.show_toggle;
+    },
+    async getData(){
+      const res = await this.$jsonp("http://api.jisuapi.com/news/get", { channel: "科技", start: 0, num: 100, appkey: "38caeac95ecec751" });
+      if (!res) return ;
+      if (res && res.status === 0);
+      this.Newslist = res.result['list'];
     }
   }
 };
