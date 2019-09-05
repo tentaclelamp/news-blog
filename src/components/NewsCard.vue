@@ -43,6 +43,8 @@ export default {
       show_toggle: true
     };
   },
+  mounted(){
+  },
   methods: {
     ShowToggle() {
       this.show_toggle = !this.show_toggle;

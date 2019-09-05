@@ -95,110 +95,42 @@ export default {
     toggle() {
       this.insert = !this.insert;
     },
-    complete() {
-      // const data = { bar: 123 };
-      const options = {
-        method: "POST",
-        headers: { "content-type": "application/x-www-form-urlencoded" },
-        data: this.qs.stringify({
-          title: this.title,
-          content: this.editorText
-        }),
-        url: "http://localhost:5000/api/v1/articles",
-        responseType: "json",
-        withCredentials: false
-      };
-      this.axios(options)
-        .then(result => {
-          this.retrieve();
-          this.insert = !this.insert;
-          this.editorText = "开始编辑博客日志";
-          this.title = "";
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    async getArticles() {
+      const res = await this.axios.get('http://localhost:5000/api/v1/articles', { params: {title: 'test'} });
+      if(!res) return;
+      if (res.status === 200) {
+        this.articles = res.data
+      } else {
+        this.$bvToast.toast(res);
+        throw res;
+      }
     },
-    retrieve() {
-      const options = {
-        method: "GET",
-        headers: { "content-type": "application/x-www-form-urlencoded" },
-        params: {
-          //查询参数
-          title: "test"
-          // content: this.editorText
-        },
-        url: "http://localhost:5000/api/v1/articles",
-        responseType: "json",
-        withCredentials: false
-      };
-      this.axios(options)
-        .then(result => {
-          this.articles = result["data"];
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    async complete() {
+      const params = { title: this.title, content: this.editorText};
+      const res = await this.axios.post('http://localhost:5000/api/v1/articles', params);
+      if(!res) return;
+      if (res.status === 200) {
+        this.getArticles();
+        this.insert = !this.insert;
+        this.editorText = "开始编辑博客日志";
+        this.title = "";        
+      } else {
+        throw res;
+      }
     },
-    remove_article(article_id) {
-      const options = {
-        method: "DELETE",
-        headers: { "content-type": "application/x-www-form-urlencoded" },
-        params: {
-          //文章id
-          id: article_id
-          // content: this.editorText
-        },
-        url: "http://localhost:5000/api/v1/articles",
-        responseType: "json",
-        withCredentials: false
-      };
-      this.axios(options)
-        .then(result => {
-          this.retrieve();
-        })
-        .catch(err => {
-          if (err.response.status == 401) {
-            const options = {
-              method: "GET",
-              headers: { "content-type": "application/x-www-form-urlencoded" },
-              params: {
-                //文章id
-                nickname: 'sanyo',
-                pwd: '1234'
-                // content: this.editorText
-              }
-            };
-            this.axios(options).then((result) => {
-              console.log(result)
-            }).catch((err) => {
-              console.log(err)
-            });
-            this.$refs["authtip"].show();
-          }
-        });
+    async remove_article(id) {
+      const params = { id };
+      const res = await this.axios.delete('http://localhost:5000/api/v1/articles', {params});
+      if(!res) return;
+      if(res.status ===200){
+        this.getArticles();
+        this.editorText = "开始编辑博客日志";
+        this.title = "";           
+      }
     }
   },
   created() {
-    const options = {
-      method: "GET",
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      params: {
-        //查询参数
-        title: "test"
-        // content: this.editorText
-      },
-      url: "http://localhost:5000/api/v1/articles",
-      responseType: "json",
-      withCredentials: false
-    };
-    this.axios(options)
-      .then(result => {
-        this.articles = result["data"];
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.getArticles()
   }
 };
 </script>
