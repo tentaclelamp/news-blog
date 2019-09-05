@@ -30,10 +30,14 @@ export default {
       this.show_toggle = !this.show_toggle;
     },
     async getData(){
-      const res = await this.$jsonp("http://api.jisuapi.com/news/get", { channel: "科技", start: 0, num: 100, appkey: "38caeac95ecec751" });
+      const res = await this.$jsonp("http://api.jisuapi.com/news/get", { channel: "科技", start: 0, num: 100, appkey: "be0614c5a2daffb3" });
+      // let res = await this.$jsonp("http://api.jisuapi.com/news/get", { channel: "科技", start: 0, num: 100, appkey: "38caeac95ecec751" }); //我的
       if (!res) return ;
-      if (res && res.status === 0);
-      this.Newslist = res.result['list'];
+      if (res && res.status === 0){
+        this.Newslist = res.result.list;
+      } else {
+        throw res
+      }
     }
   }
 };
