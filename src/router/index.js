@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/Home'
 import News from '@/components/News'
 import Knowledge from '@/components/Knowledge'
@@ -9,18 +8,13 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld
-    // }
     {
       path: '/News',
       name: 'News',
       meta: {
         title: 'News'
       },
-      component: News
+      component: () => import(/* webpackChunkName: "news" */ '../components/News.vue')
     },
     {
       path: '/',
@@ -28,12 +22,12 @@ export default new Router({
       meta: {
         title: ''
       },
-      component: News
+      component: () => import(/* webpackChunkName: "news" */ '../components/News.vue')
     },
     {
       path: '/Knowledge',
       name: 'Knowledge',
-      component: Knowledge
+      component: () => import(/* webpackChunkName: "about" */ '../components/Knowledge.vue')
     }
   ]
 })

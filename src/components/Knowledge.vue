@@ -96,7 +96,7 @@ export default {
       this.insert = !this.insert;
     },
     async getArticles() {
-      const res = await this.axios.get('http://118.25.154.5:5000/api/v1/articles', { params: {title: 'test'} });
+      const res = await this.axios.get('http://localhost:5000/api/v1/articles',); // { params: {title: 'test'} });
       if(!res) return;
       if (res.status === 200) {
         this.articles = res.data
@@ -107,7 +107,7 @@ export default {
     },
     async complete() {
       const params = { title: this.title, content: this.editorText};
-      const res = await this.axios.post('http://118.25.154.5:5000/api/v1/articles', params);
+      const res = await this.axios.post('http://localhost:5000/api/v1/articles', params);
       if(!res) return;
       if (res.status === 200) {
         this.getArticles();
@@ -120,7 +120,7 @@ export default {
     },
     async remove_article(id) {
       const params = { id };
-      const res = await this.axios.delete('http://118.25.154.5:5000/api/v1/articles', {params});
+      const res = await this.axios.delete('http://localhost:5000/api/v1/articles', {params});
       if(!res) return;
       if(res.status ===200){
         this.getArticles();

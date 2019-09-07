@@ -3,31 +3,13 @@
     <b-container class="col-md-6">
       <b-row align-h="center">
         <b-card>
-          <b-media
-            vertical-align="top"
-            tag="li"
-            :class="show_toggle ? 'overflow-hidden' : 'overflow'"
-          >
-            <b-media vertical-align='center'>
-              <b-img-lazy
-                center
-                rounded="circle"
-                slot="aside"
-                :src="news.pic"
-                width="64"
-                height="64"
-                alt="placeholder"
-                class="usericon"
-              ></b-img-lazy>
+          <b-media vertical-align="top" tag="li" :class="show_toggle ? 'overflow-hidden' : 'overflow'" >
+            <b-media vertical-align='center'> <b-img-lazy center rounded="circle" slot="aside" :src="news.pic" width="64" height="64" alt="placeholder" class="usericon"/>
               <b-link :href="news.url">{{ news.title }}</b-link>
             </b-media>
             <p v-html="news.content"></p>
           </b-media>
-          <b-button
-            block
-            @click="ShowToggle"
-            :variant="show_toggle ? '':'outline-warning'"
-          >{{ show_toggle ? '阅读全文' : '折叠' }}</b-button>
+          <b-button block @click="ShowToggle" :variant="show_toggle ? '':'outline-warning'" >{{ show_toggle ? '阅读全文' : '折叠' }}</b-button>
         </b-card>
       </b-row>
     </b-container>
