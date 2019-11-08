@@ -19,7 +19,7 @@ module.exports = {
     'vue': 'Vue',
     'vue-router': 'VueRouter',
     'axios': 'axios',
-    'bootstrap-vue': 'bootstrap-vue',
+    // 'bootstrap-vue': 'bootstrap-vue',
     'jquery': '$',
     'bootstrap': 'bootstrap'
   },
